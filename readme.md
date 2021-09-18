@@ -111,3 +111,16 @@ fs模块中所有操作都有两种形式可供选择同步和异步
 ```fs.createWriteStream(path[, options])``` 创建一个可写流
 
 
+## webServer
+
+### 核心模块
+
+- ```http```:创建HTTP服务  ```http.createServer((req,res)=>{}).listen(port)```
+- ```url```:提供用于网址处理和解析的实用工具  
+    ```let param = url.parse(request.url,true).query```获取get参数
+
+    ```let param = url.parse(request.url,true).pathname```获取请求路径
+
+- ```path```:提供了用于处理文件和目录的路径的实用工具
+
+    ```path.extname() ```方法返回 path 的扩展名
