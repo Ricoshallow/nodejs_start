@@ -115,12 +115,46 @@ fs模块中所有操作都有两种形式可供选择同步和异步
 
 ### 核心模块
 
-- ```http```:创建HTTP服务  ```http.createServer((req,res)=>{}).listen(port)```
+- ```http```:创建HTTP服务  
+
+    ```javascript
+    http.createServer((req,res)=>{
+        req.method // 请求方法
+        req.headers // 请求报文
+        req.url // 请求地址(包含get请求参数)
+        res.writeHead(statusCode, {'content-type': 'htmlType;charset=utf-8'}) // 设置响应头状态码和文件类型并防止中文乱码
+
+        // post请求参数放置在请求体中进行传输，需要通过监听data和end事件进行处理 
+        let params = ''
+        req.on('data',(data)=>{
+            params += data
+        })
+        req.on('end',()=>{
+            console.log(params);
+        })
+
+        res.end() // 响应给客户端的信息
+    }).listen(port)
+    ```
 - ```url```:提供用于网址处理和解析的实用工具  
     ```let param = url.parse(request.url,true).query```获取get参数
 
-    ```let param = url.parse(request.url,true).pathname```获取请求路径
+    ```let url = url.parse(request.url,true).pathname```获取请求路径
+
+- ```querystring```:将post参数转换为对象格式
 
 - ```path```:提供了用于处理文件和目录的路径的实用工具
 
     ```path.extname() ```方法返回 path 的扩展名
+    ```path.join(__dirname,'')``` 方法拼接静态资源的的绝对路径
+- ```mime``` 媒体类型映射综合库
+    ```mime.getType(staticPath)``` 方法返回路径对应的mime
+
+## express框架
+- 提供方便简洁的路由定义方式
+    ```app.get('/home',(req,res)=>{})```
+- 对获取HTTP请求参数进行简化处理
+- 对模板引擎支持程度高，方便渲染动态HTML
+- 提供中间件机制有效控制HTTP请求
+   ```app.get('/home',(req,res,next)=>{next()})```
+   ```app.use((req,res,next)=>{next()})```匹配所有请求方式和请求路径

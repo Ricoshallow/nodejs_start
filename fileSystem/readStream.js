@@ -7,7 +7,7 @@ let ws = fs.createWriteStream("mind.jpg")
 // rs.pipe(ws)
 
 // 读取一个可读流中的数据，可以为可读流绑定一个data事件
-rs.on('data',function(data){
+rs.on('data', function (data) {
     //较大的文件分流读取
     console.log(data);
 })
