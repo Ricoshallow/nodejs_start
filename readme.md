@@ -151,10 +151,37 @@ fs模块中所有操作都有两种形式可供选择同步和异步
     ```mime.getType(staticPath)``` 方法返回路径对应的mime
 
 ## express框架
+### 核心
 - 提供方便简洁的路由定义方式
     ```app.get('/home',(req,res)=>{})```
 - 对获取HTTP请求参数进行简化处理
+    - get请求参数获取
+
+        ```app.get('/get',(req,res)=>{req.query})```
+    - post请求参数获取(用第三方模块body-parser)
+
+         ```app.post('/post',(req,res)=>{req.body})```
 - 对模板引擎支持程度高，方便渲染动态HTML
+    [(模板引擎示例)](./express/expressArtTemplate.js)
+- 简单的静态资源访问代码
+
+    ```app.use(express.static(staticPath))```
 - 提供中间件机制有效控制HTTP请求
+
    ```app.get('/home',(req,res,next)=>{next()})```
+
    ```app.use((req,res,next)=>{next()})```匹配所有请求方式和请求路径
+
+### 中间件应用
+   1. 路由保护，登录状态允许访问(调用next方法)，否则重定向到登录页面
+   ```app.use((req,res,next)=>{if (islogin) next()})```
+   2. 网站维护公告，定义接收所有请求的中间件(最上面)
+   ```app.use((req,res,next)=>{res.send('server is debuging')})```
+   3. 定义404页面(最下面)
+   ```app.use((req,res,next)=>{res.status(404).send('page not found')})```
+   4. 错误处理
+   ```app.use((err,req,res,next)=>{res.status(500).send(err.message)})```
+
+
+
+ 
