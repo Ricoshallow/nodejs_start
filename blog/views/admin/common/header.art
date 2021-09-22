@@ -1,0 +1,25 @@
+<!-- 头部 -->
+<div class="header">
+    <!-- 网站标志 -->
+    <div class="logo fl">
+        <div class="logo fl">
+            Ricoshallow Blog <i>clean code</i>
+        </div>
+    </div>
+    <!-- /网站标志 -->
+    <!-- 用户信息 -->
+    <div class="info">
+        <div class="profile dropdown fr">
+            <span class="btn dropdown-toggle" data-toggle="dropdown">
+                admin
+                <span class="caret"></span>
+            </span>
+            <ul class="dropdown-menu">
+                <li><a href="user-edit.html">user info</a></li>
+                <li><a href="#">logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /用户信息 -->
+</div>
+<!-- /头部 -->

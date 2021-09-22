@@ -1,0 +1,21 @@
+<!-- 侧边栏 -->
+<div class="aside fl">
+    <ul class="menu list-unstyled">
+        <li>
+            <a class="item active" href="user.html">
+                <span class="glyphicon glyphicon-user"></span>
+                Users Manager
+            </a>
+        </li>
+        <li>
+            <a class="item" href="article.html">
+                <span class="glyphicon glyphicon-th-list"></span>
+                Article Manager
+            </a>
+        </li>
+    </ul>
+    <div class="cprt">
+        Powered by <a href="https://github.com/Ricoshallow/" target="_blank">Ricoshallow</a>
+    </div>
+</div>
+<!-- 侧边栏 -->
