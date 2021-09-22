@@ -150,6 +150,40 @@ fs模块中所有操作都有两种形式可供选择同步和异步
 - ```mime``` 媒体类型映射综合库
     ```mime.getType(staticPath)``` 方法返回路径对应的mime
 
+## mongodb
+### 数据库核心
+
+- database：数据库
+- collection：集合，一组数据的集合
+- document：文档，一条具体的数据
+- field：字段，文档中的属性名称
+### 增刪改查 
+- 连接数据库 ```mongoose.connect()```
+- 增 [(mongodb增加文档)](./mongodb/mongoAdd.js)
+     - 创建集合 ```new mongoose.Schema({})``` ```mongoose.model```
+     - 向集合中插入数据 ```save()``` ```Collection.create()```
+- 查 [(mongodb查询文档)](./mongodb/mongoFind.js)
+    - 全局查询 ```Collection.find()```
+    - 通过字段查询 ```Collection.find({id:xxxxxx})```
+    - 查找一个 ```Collection.findOne({id:xxxxxx})```
+    - 按条件查找 ```....```
+    - 获取数据库中已经存在的集合
+    ```javascript 
+    const userSchema = mongoose.Schema()
+    const User = mongoose.model('User',userSchema,'users')
+    ```
+- 改 
+    ```User.updateOne({name: old},{name: new})```
+
+    ```User.updateMany()```
+- 删
+    - 删除一个指定文档，结果返回删除的文档 ```Collection.findOneAndDelete({id: xxxxx})```
+    - 删除全部文档，结果返回删除状态和删除的总条数  ```Collection.deleteMany({})```
+### 集合关联
+    - 使用id对集合进行关联
+    - 使用populate方法进行关联集合查询
+### 导入数据
+```mongoimport -d 数据库名称 -c 集合名称 -file要导入的数据文件```
 ## express框架
 ### 核心
 - 提供方便简洁的路由定义方式
