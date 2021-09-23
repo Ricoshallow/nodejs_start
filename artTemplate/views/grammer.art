@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 标准语法 -->
+    <p>{{name}}</p>
+    <p>{{1+1}}</p>
+    <p>{{@content}}</p>
+
+    <Ul>
+        {{each hobbies}}
+            <li>{{$value}}</li>
+        {{/each}}
+    </Ul>
+
+    {{if age >18}}
+        <p>i am more than 18 years old</p>
+    {{else if age <15}}
+        <p>i am more than 18 years old</p>
+    {{else}}
+        <p>i am between 15 and 18</p>
+    {{/if}}
+    <!-- --------------- -->
+
+    <!-- 原始语法 -->
+    <p><%=name%></p>
+    <p><%=1+1%></p>
+    <p><%-content%></p>
+</body>
+</html>

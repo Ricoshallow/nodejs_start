@@ -184,6 +184,23 @@ fs模块中所有操作都有两种形式可供选择同步和异步
     - 使用populate方法进行关联集合查询
 ### 导入数据
 ```mongoimport -d 数据库名称 -c 集合名称 -file要导入的数据文件```
+
+## Art-template
+### 标准语法
+- ```{{data}}```
+- ```{{@data}}```原文输出
+- ```{{if}}{{else}}{{/if}}```条件
+- ```{{each data}}{{$value $index}}{{/each}}```循环
+### 原始语法
+- ```<%=data%>```
+- ```<%-data%>```原文输出
+### 子模版
+```{{include 'path'}}```引入子模版
+```{{extend 'layout path'}}  {{block 'JavaScript'}}special JavaScript{{/bloack}}``` 继承公共骨架 填充自有内容
+### 模板配置
+- ```template.defaults.imports.变量``` 配置变量
+- ```template.defaults.root``` 配置根目录
+- ```template.defautls.extname``` 配置模板默认后缀
 ## express框架
 ### 核心
 - 提供方便简洁的路由定义方式
