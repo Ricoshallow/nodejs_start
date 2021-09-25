@@ -1,36 +1,74 @@
 {{extend './common/layout.art'}}
 {{block 'link'}}
-    <style>
-        .login{
-            border-radius: 2%;
-        }
-        form {
-            text-align: center;
-        }
-        .form-group {
-            text-align:left;
-        }
-    </style>
+<style>
+    .login {
+        border-radius: 2%;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    .form-group {
+        text-align: left;
+    }
+</style>
 {{/block}}
 {{block 'main'}}
-     <div class="login-body">
-        <div class="login-container">
-            <h4 class="title">Blog management system</h4>
-            <div class="login">
-                <form action="user.html">
-                    <div class="form-group">
-                        <label>email</label>
-                        <input type="email" class="form-control" placeholder="please input email">
-                    </div>
-                    <div class="form-group">
-                        <label>password</label>
-                        <input type="password" class="form-control" placeholder="please input password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">login</button>
-                </form>
-            </div>
-            <div class="tips"></div>
-        </div>
-    </div>
-{{/block}}
+<div class="login-body">
+    <div class="login-container">
+        <h4 class="title">Blog management system</h4>
+        <div class="tips" style="text-align: center;margin-bottom: 15px;border-radius: 3%;"></div>
+        <div class="login">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>email</label>
+                    <input name="email" type="email" class="form-control" placeholder="please input email">
+                </div>
+                <div class="form-group">
+                    <label>password</label>
+                    <input name="password" type="password" class="form-control" placeholder="please input password">
+                </div>
+                <button id="login" type="button" class="btn btn-primary">login</button>
 
+            </form>
+        </div>
+
+    </div>
+</div>
+{{/block}}
+{{block 'script'}}
+<script type="text/javascript">
+    $('#login').bind('click', function () {
+        let formData = serializeToJson($('#loginForm'))
+        // console.log(formData);
+        // front validate
+        if (formData.email.trim().length === 0) {
+            alert('please input email')
+            return
+        }
+        if (formData.password.trim().length === 0) {
+            alert('please input password')
+            return
+        }
+        $.ajax({
+            type: 'post',
+            url: "http://localhost:3000/request/login",
+            data: formData,
+            success: function (data) {
+                // console.log(data);
+                if (data === 'correct') {
+                    window.location.replace('http://localhost:3000/admin/user')
+                } else {
+                    $('.tips').empty()
+                    $('.tips').append(`email or password is incorrect!`)
+                }
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    })
+</script>
+{{/block}}
