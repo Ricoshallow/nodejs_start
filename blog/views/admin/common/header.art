@@ -3,7 +3,7 @@
     <!-- 网站标志 -->
     <div class="logo fl">
         <div class="logo fl">
-            Ricoshallow Blog <i>clean code</i>
+            Programing Blog <i>clean code</i>
         </div>
     </div>
     <!-- /网站标志 -->
@@ -11,12 +11,12 @@
     <div class="info">
         <div class="profile dropdown fr">
             <span class="btn dropdown-toggle" data-toggle="dropdown">
-                admin
+                {{ userInfo && userInfo.username}}
                 <span class="caret"></span>
             </span>
             <ul class="dropdown-menu">
-                <li><a href="user-edit.html">user info</a></li>
-                <li><a href="#">logout</a></li>
+                <li><a href="/admin/user-edit">user info</a></li>
+                <li><a href="/admin/logout">logout</a></li>
             </ul>
         </div>
     </div>
