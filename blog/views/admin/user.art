@@ -8,8 +8,8 @@
         <div class="main">
         	<!-- 分类标题 -->
             <div class="title">
-                <h4>User</h4>
-                <span>find one user</span>
+                <h4>User Information</h4>
+                <span>find {{totalData}} users</span>
                 <a href="/admin/user-edit" class="btn btn-primary new">add user</a>
             </div>
             <!-- /分类标题 -->
@@ -42,18 +42,16 @@
             <!-- /内容列表 -->
             <!-- 分页 -->
             <ul class="pagination">
-                <li>
-                    <a href="#">
+                <li style="display:<%= page==1? 'none': 'inline' %>">
+                    <a href="/admin/user?page=<%= page-1%>">
 			        <span>&laquo;</span>
 			      </a>
                 </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#">
+                <% for(let i=0;i<totalPage;i++){ %>
+                <li ><a style="background-color: <%= page== i+1? '#ddd': ''%>" href="/admin/user?page=<%= i+1%>"><%= i+1%></a></li>
+                <%}%>
+                <li style="display:<%= page==totalPage? 'none': 'inline' %>">
+                    <a href="/admin/user?page=<%= page-0+1%>">
 			        <span>&raquo;</span>
 			      </a>
                 </li>
@@ -68,13 +66,13 @@
             <form class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                    <h4 class="modal-title">请确认</h4>
+                    <h4 class="modal-title">please confirm</h4>
                 </div>
                 <div class="modal-body">
-                    <p>您确定要删除这个用户吗?</p>
+                    <p>Are you sure you want to delete this user??</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
                     <input type="submit" class="btn btn-primary">
                 </div>
             </form>
