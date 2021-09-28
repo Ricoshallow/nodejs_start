@@ -42,3 +42,13 @@ form表单中的button如果没有指定type默认为submit
    ``` let page = req.qurey```通过get请求参数获得当前页(/admin/user?page=2)
 - 总页数，根据总页数判断当前页是否为最后一页(Math.ceil 总数据条数/每页显示数据条数)
     ```User.countDocuments()```数据库总文档数
+
+## 用户信息删除
+- 确认删除框中添加隐藏域 用以存储要删除的用户的ID
+- 为删除按钮添加自定义属性用以存储要删除的用户的ID
+- 为删除按钮添加点击事件，在点击事件处理函数中获取自定义属性
+- 为删除表单添加提交地址以及提交方式
+- 接收客户端传过来的id参数，并根据id删除用户
+
+### 坑 
+mongoose API中id需要写成_id ```User.findOneAndDelete({_id: '614b10db6e1eb00816afa281'})```

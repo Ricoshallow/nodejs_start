@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema)
 
 User.find().then(res=>console.log(res))
-User.find({id: '5c09f2b6aeb04b22f846096a'}).then(res=>console.log(res))
+User.find({_id: '5c09f2b6aeb04b22f846096a'}).then(res=>console.log(res))
 User.findOne({name:'李四'}).then(res=>console.log(res))
 // 查找年龄大于20 小于40的文档
 User.find({age:{$gt:20,$lt:40}}).then(res=>console.log(res))

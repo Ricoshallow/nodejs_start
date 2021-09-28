@@ -13,5 +13,5 @@ const testSchema = new mongoose.Schema({
 // 使用規則創建集合
 const Test = mongoose.model("Test", testSchema)
 
-Test.findOneAndDelete({id: '614b10db6e1eb00816afa281'}).then(res=>console.log(res)) // 返回删除的对象
+Test.findOneAndDelete({_id: '614b10db6e1eb00816afa281'}).then(res=>console.log(res)) // 返回删除的对象
 Test.deleteMany({}).then(res=>console.log(res)) // 返回一个对象表明删除操作成功与否和删除的文档条数

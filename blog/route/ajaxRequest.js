@@ -51,5 +51,19 @@ request.post('/addUser',async(req,res)=>{
         
     }
 })
+request.post('/editUser',async(req,res)=>{
+    let {id,username,email,password,role,state} = req.body
+    state = state === 'on'? 1 : 0
+    let existEmail = await User.findOne({email})
+    // console.log(existEmail);
+    if (existEmail){
+        return res.send('current email has existed')
+        
+    } else {
+        User.findByIdAndUpdate(id,{username,email,state,role}).then((res)=>console.log(res))
+        res.send('correct')
+        
+    }
+})
 
 module.exports = request

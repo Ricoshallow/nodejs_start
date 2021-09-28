@@ -15,15 +15,15 @@
             <form class="form-container" id="addUserForm">
                 <div class="form-group">
                     <label>username</label>
-                    <input name="username" type="text" class="form-control" placeholder="please input the username">
+                    <input name="username" type="text" class="form-control" placeholder="please input the username"  value=<%= username? username: '' %>>
                 </div>
                 <div class="form-group">
                     <label>email</label>
-                    <input name="email" type="email" class="form-control" placeholder="please input the email">
+                    <input name="email" type="email" class="form-control" placeholder="please input the email" value=<%= email? email : '' %>>
                 </div>
                 <div class="form-group">
                     <label>password</label>
-                    <input name="password" type="password" class="form-control" placeholder="please input the password">
+                    <input name="password" type="password" class="form-control" placeholder="please input the password" value=<%= password? password : '' %>>
                 </div>
                 <div class="form-group">
                     <label>role</label>
@@ -48,33 +48,60 @@
 {{/block}}
 {{block 'script'}}
     <script type="text/javascript">
+        const url = window.location.href
+        const params = url.split('=')
         $('#addUserBtn').bind('click',function(){
             // front validation
             let formData = serializeToJson($('#addUserForm'))
-            console.log(Object.keys(formData).length)
-            if (Object.keys(formData).length !== 5){
-                $('.tips').empty()
-                $('.tips').append(`Please check that the form is completed `)
-                return
-            }
-            $.ajax({
-                type: 'post',
-                url: "http://localhost:3000/request/addUser",
-                data: formData,
-                success: function (data) {
-                    // console.log(data);
-                    if (data === 'correct') {
-                        window.location.replace('http://localhost:3000/admin/user')
-                    } else {
-                        $('.tips').empty()
-                        $('.tips').append(`The current mailbox is not available!`)
-                    }
-
-                },
-                error: function (err) {
-                    console.log(err);
+            for (let item in formData){
+                if (formData[item].trim()==''){
+                    $('.tips').empty()
+                    $('.tips').append(`Please check that the form is completed `)
+                    return
                 }
-            })
+            }       
+            
+            if (params.length === 2){
+                // edit user information
+                let id = params[1]
+                formData.id = id
+                 $.ajax({
+                    type: 'post',
+                    url: "http://localhost:3000/request/editUser",
+                    data: formData,
+                    success: function (data) {
+                        // console.log(data);
+                        if (data === 'correct') {
+                            window.location.replace('http://localhost:3000/admin/user')
+                        } else {
+                            $('.tips').empty()
+                            $('.tips').append(`The current mailbox is not available!`)
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            }else {
+                // add new user
+                $.ajax({
+                    type: 'post',
+                    url: "http://localhost:3000/request/addUser",
+                    data: formData,
+                    success: function (data) {
+                        // console.log(data);
+                        if (data === 'correct') {
+                            window.location.replace('http://localhost:3000/admin/user')
+                        } else {
+                            $('.tips').empty()
+                            $('.tips').append(`The current mailbox is not available!`)
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            }  
         })
     </script>
 
